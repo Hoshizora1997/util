@@ -4,6 +4,9 @@ from selenium import webdriver
 import re
 import datetime
 
+USERNAME = '0012020000000'
+PASS = 'passpass'
+
 def respon(code):
     driver = webdriver.Chrome()
     driver.get('https://atmnb.tsukuba.ac.jp/attend/tsukuba')
@@ -12,7 +15,15 @@ def respon(code):
     inputBox[0].send_keys(code)
     time.sleep(1)
     inputBox[0].submit()
-    time.sleep(60)
+    time.sleep(5)
+    username = driver.find_elements_by_id("username")
+    username[0].send_keys(USERNAME)
+    password = driver.find_elements_by_id("password")
+    password[0].send_keys(PASS)
+    time.sleep(1)
+    driver.find_element_by_name('_eventId_proceed').click()
+    time.sleep(5)
+    driver.find_element_by_name('insertdb').click()
     driver.quit()
 
 driver = webdriver.Chrome()
@@ -23,7 +34,8 @@ while True:
     texts = driver.find_elements_by_tag_name("fit-text")
     num = None
     for t in texts:
-        num = re.match(r'[0-9]{9}', t.text)
+        num = re.search(r'[0-9]{9}?', t.text)
+        print(t.text)
         if num: # 数字9桁で構成される文字列が見つかった場合
             print(str(datetime.datetime.now()) + '出席コードが見つかりました。出席番号:' + num.group())
             respon(num.group())
