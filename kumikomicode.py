@@ -2,7 +2,7 @@ import chromedriver_binary
 import time
 from selenium import webdriver
 import re
-from .respon import respon
+import respon
 
 driver = webdriver.Chrome()
 
