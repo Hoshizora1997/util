@@ -2,6 +2,7 @@ import chromedriver_binary
 import time
 from selenium import webdriver
 import re
+from .respon import respon
 
 driver = webdriver.Chrome()
 
@@ -14,7 +15,7 @@ while True:
         num = re.match(r'[0-9]{9}', t.text)
         if num: # 数字9桁で構成される文字列が見つかった場合
             print(num)
-            # ここに処理を入れれば自動出席もできる
+            respon(num)
             break
 
     time.sleep(60)
