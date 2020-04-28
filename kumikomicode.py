@@ -17,13 +17,16 @@ def respon(code):
     inputBox[0].submit()
     time.sleep(5)
     username = driver.find_elements_by_id("username")
-    username[0].send_keys(USERNAME)
+    username[0].send_keys('0012020206003')
     password = driver.find_elements_by_id("password")
-    password[0].send_keys(PASS)
+    password[0].send_keys('Daityan123')
     time.sleep(1)
     driver.find_element_by_name('_eventId_proceed').click()
     time.sleep(5)
-    driver.find_element_by_name('insertdb').click()
+    try:
+        driver.find_element_by_name('insertdb').click()
+    except:
+        print(str(datetime.datetime.now()) + '出席済みです')
     driver.quit()
 
 driver = webdriver.Chrome()

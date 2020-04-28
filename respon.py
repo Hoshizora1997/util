@@ -2,6 +2,7 @@ import chromedriver_binary
 import time
 from selenium import webdriver
 import re
+import datetime
 
 def respon(code):
     driver = webdriver.Chrome()
@@ -19,7 +20,10 @@ def respon(code):
     time.sleep(1)
     driver.find_element_by_name('_eventId_proceed').click()
     time.sleep(5)
-    driver.find_element_by_name('insertdb').click()
+    try:
+        driver.find_element_by_name('insertdb').click()
+    except:
+        print(str(datetime.datetime.now()) + '出席済みです')
     driver.quit()
 
 respon('530645578')
